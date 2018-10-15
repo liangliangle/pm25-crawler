@@ -49,6 +49,6 @@ public class MainTest {
       });
       System.out.println();
     });
-    WebDriverConst.quit();
+
   }
 }

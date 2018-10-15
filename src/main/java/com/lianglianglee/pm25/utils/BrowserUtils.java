@@ -23,13 +23,6 @@ public class BrowserUtils {
   private static Logger logger = Logger.getLogger(BrowserUtils.class);
 
 
-  private static ThreadLocal<WebDriver> threadLocal = new ThreadLocal<WebDriver>() {
-    @Override
-    protected WebDriver initialValue() {
-      return null;
-    }
-  };
-
   /**
    * get webDriver.
    */
@@ -62,7 +55,7 @@ public class BrowserUtils {
    * @return 返回浏览器
    * @throws IOException 异常
    */
-  private static WebDriver getInstanceByChrome() {
+  public static WebDriver getInstanceByChrome() {
     try {
       String driverDirectory = ConfigurationUtil.getProperty(ConfigurationUtil.CHROME_PATH) == null
               ? "./chromedriver.exe" : ConfigurationUtil.getProperty(ConfigurationUtil.CHROME_PATH);
@@ -80,33 +73,6 @@ public class BrowserUtils {
       return null;
     }
 
-  }
-
-
-  /**
-   * 打开一个浏览器
-   *
-   * @return 浏览器
-   */
-  public static WebDriver getWebDriver() {
-    WebDriver webDriver = threadLocal.get();
-    if (null == webDriver) {
-      webDriver = getInstanceByChrome();
-      threadLocal.set(webDriver);
-    }
-    return webDriver;
-  }
-
-
-  /**
-   * 退出浏览器.
-   */
-  public static void quitCurrent() {
-    WebDriver webDriver = threadLocal.get();
-    if (null != webDriver) {
-      webDriver.quit();
-      threadLocal.remove();
-    }
   }
 
 

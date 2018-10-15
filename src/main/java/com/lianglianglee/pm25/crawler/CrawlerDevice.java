@@ -30,12 +30,15 @@ public class CrawlerDevice implements Runnable {
   }
 
   public CrawlerDevice(String url) {
+    if (!url.startsWith("http")) {
+      url = "http://pm25.in" + url;
+    }
     this.url = url;
   }
 
 
   public List<List<String>> getData() {
-    String html = WebDriverConst.getUrl(this.url, false);
+    String html = WebDriverConst.getUrl(this.url);
     Document doc = Jsoup.parse(html);
     Element table = doc.select("table").first();
     String cityname = doc.getElementsByClass("city_name").tagName("h2").text();

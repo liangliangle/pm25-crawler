@@ -19,7 +19,7 @@ public class CrawlerCity {
   private static final int[] index = {1, 2, 5, 6, 7, 11, 9, 8, 4};
 
   public List<List<String>> getData() {
-    String html = WebDriverConst.getUrl(UrlConst.MAIN_URL, true);
+    String html = WebDriverConst.getUrl(UrlConst.MAIN_URL);
     Document doc = Jsoup.parse(html);
     Element table = doc.select("table").first();
     return HtmlUtils.getCityTable(table, 1, index);
