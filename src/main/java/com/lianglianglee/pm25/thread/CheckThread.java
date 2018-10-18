@@ -1,7 +1,6 @@
 package com.lianglianglee.pm25.thread;
 
 import com.lianglianglee.pm25.crawler.CheckData;
-import com.lianglianglee.pm25.crawler.ThreadPool;
 
 /**
  * @ClessName CheckThread
@@ -10,8 +9,7 @@ import com.lianglianglee.pm25.crawler.ThreadPool;
  * @Date 2018/9/30 17:04
  * @Version 1.0
  */
-public class CheckThread extends Thread {
-  @Override
+public class CheckThread {
   public void run() {
     while (true) {
       try {
@@ -19,7 +17,7 @@ public class CheckThread extends Thread {
           new MainThread().run();
           new ThreadPool().run();
         }
-        Thread.sleep(6000000);
+        Thread.sleep(60000);
       } catch (Exception e) {
         e.printStackTrace();
       }

@@ -1,9 +1,12 @@
 package com.lianglianglee.pm25.crawler;
 
 import com.lianglianglee.pm25.consts.AppConst;
+import com.lianglianglee.pm25.utils.LoggerUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @ClessName CheckData
@@ -15,10 +18,16 @@ import org.openqa.selenium.By;
 public class CheckData {
 
   public static boolean checkData() {
-    String date = AppConst.getDate();
     String html = WebDriverConst.getUrl(UrlConst.MAIN_URL);
     Document doc = Jsoup.parse(html);
     String currentString = doc.getElementsByClass("time").text();
+    LoggerUtil.info("页面" + currentString);
+    return checkData(currentString);
+  }
+
+
+  public static boolean checkData(String currentString) {
+    String date = AppConst.getDate();
     date = "数据更新时间：" + date;
     if (!currentString.equals(date)) {
       String[] strings = currentString.split("数据更新时间：");

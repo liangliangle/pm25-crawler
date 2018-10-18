@@ -25,4 +25,3 @@ Mysql5.7
 
 ## 开发环境运行，请将config.properties复制到target目录下，必须配置datasource相关属性。
 
-# 由于是开发中的项目，请谨慎使用。

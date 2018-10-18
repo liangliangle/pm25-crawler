@@ -1,5 +1,7 @@
 package com.lianglianglee.pm25.crawler;
 
+import com.lianglianglee.pm25.utils.LoggerUtil;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -15,10 +17,12 @@ public class WaitCrawlerCity {
   private static Queue<String> waitUrl = new LinkedList<>();
 
   public synchronized static void addTask(String url) {
+    LoggerUtil.info("添加任务，剩余任务数：" + waitUrl.size());
     waitUrl.add(url);
   }
 
   public synchronized static String getTask() {
+    LoggerUtil.info("获取任务，剩余任务数：" + waitUrl.size());
     return waitUrl.poll();
   }
 }

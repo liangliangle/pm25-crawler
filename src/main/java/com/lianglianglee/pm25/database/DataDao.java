@@ -101,7 +101,6 @@ public class DataDao {
     } catch (SQLException e) {
       e.printStackTrace();
       Conn.rollBackTransaction(con);
-      count = 0;
       throw new RuntimeException("写入失败");
     } finally {
       Conn.close(con);

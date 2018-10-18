@@ -5,7 +5,6 @@ import com.lianglianglee.pm25.thread.CheckThread;
 
 /**
  * @ClessName CrawlerApplication
- * @Desc TODO
  * @Author liangliang
  * @Date 2018/9/30 13:41
  * @Version 1.0

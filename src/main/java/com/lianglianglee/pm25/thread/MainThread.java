@@ -7,13 +7,11 @@ import java.util.List;
 
 /**
  * @ClessName MainThread
- * @Desc TODO
  * @Author liangliang
  * @Date 2018/9/30 17:09
  * @Version 1.0
  */
-public class MainThread extends Thread {
-  @Override
+public class MainThread {
   public void run() {
     List<List<String>> data = new CrawlerCity().getData();
     new DataDao().insertCityAir(data);

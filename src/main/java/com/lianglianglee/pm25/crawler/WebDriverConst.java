@@ -29,7 +29,7 @@ public class WebDriverConst {
 
 
   private static WebDriver getWebDriver() {
-    WebDriver webDriver = BrowserPool.getWebDriver();
+    WebDriver webDriver = new BrowserPool().getWebDriver();
     webDriver.switchTo().defaultContent();
     return webDriver;
   }
