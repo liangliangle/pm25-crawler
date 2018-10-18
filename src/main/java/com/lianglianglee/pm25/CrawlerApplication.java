@@ -17,7 +17,6 @@ public class CrawlerApplication {
     AppConst.build();
     new CheckThread().run();
 
-
   }
 
 

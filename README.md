@@ -7,7 +7,7 @@ Java
 
 selenium
 
-Chrome
+phantomjs
 
 Mysql
 
@@ -17,13 +17,11 @@ Mysql
 
 # 环境准备
 
-chromedriver.exe驱动
 
 java8
 
 Mysql5.7
 
-Chrome浏览器
 
 ## 开发环境运行，请将config.properties复制到target目录下，必须配置datasource相关属性。
 

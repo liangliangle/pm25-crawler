@@ -13,16 +13,13 @@
             <outputDirectory>/</outputDirectory>
             <!-- 指定那些文件需要复制进该目录下 -->
             <includes>
-                <include>README.txt</include>
+                <include>README.md</include>
                 <include>config.properties</include>
                 <include>start.bat</include>
-                <include>killchromedriver.bat</include>
-                <include>start_ones.bat</include>
                 <include>excel.json</include>
                 <include>store.json</include>
-                <include>chromedriver.exe</include>
-                <include>geckodriver.exe</include>
-                <include>start_gui.bat</include>
+                <include>phantomjs.exe</include>
+                <include>phantomjs</include>
             </includes>
         </fileSet>
         <fileSet>

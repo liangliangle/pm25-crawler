@@ -26,7 +26,7 @@ public class MainTest {
 
   @Test
   public void current() {
-    new CheckData().checkData();
+    System.out.println(System.getProperty("os.name"));
   }
 
   @Test

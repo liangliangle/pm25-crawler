@@ -26,7 +26,7 @@ public class BrowserPool {
       webDriver = webDrivers.poll();
       if (null == webDriver) {
         if (totalSize < maxPoolSize) {
-          webDriver = BrowserUtils.getInstanceByChrome();
+          webDriver = BrowserUtils.getInstance();
           totalSize++;
         }
       }
