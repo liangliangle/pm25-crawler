@@ -15,10 +15,9 @@ public class CheckThread {
     while (true) {
       try {
         if (!CheckData.checkData()) {
+          BrowserPool.clean();
           new MainThread().run();
           new ThreadPool().run();
-        } else {
-          BrowserPool.clean();
         }
         Thread.sleep(60000);
       } catch (Exception e) {
