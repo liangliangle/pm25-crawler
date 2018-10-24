@@ -55,7 +55,7 @@ public class DataDao {
     try {
       for (List<String> data : datas) {
 
-        String sql = "insert into cityair(cityname,times,aqi,pm25,pm10,co,so2,no2,o3,prima)values" +
+        String sql = "insert ignore cityair(cityname,times,aqi,pm25,pm10,co,so2,no2,o3,prima)values" +
                 "(?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         for (int i = 0; i < data.size(); i++) {
@@ -88,7 +88,7 @@ public class DataDao {
     try {
       for (List<String> data : datas) {
 
-        String sql = "insert into deviceair(stationname,cityname,times,aqi,pm25,pm10,co,so2,o3,no2,prkey)values" +
+        String sql = "insert ignore deviceair(stationname,cityname,times,aqi,pm25,pm10,co,so2,o3,no2,prkey)values" +
                 "(?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         for (int i = 0; i < data.size(); i++) {
