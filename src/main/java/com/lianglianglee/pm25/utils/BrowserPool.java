@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -61,26 +62,29 @@ public class BrowserPool {
   }
 
 
-  public  static void quit(WebDriver webDriver) {
-    synchronized(totalSize) {
+  public static void quit(WebDriver webDriver) {
+    synchronized (totalSize) {
       webDriver.quit();
       totalSize--;
       LoggerUtil.info("浏览器注销了，还有：" + webDrivers.size() + "个浏览器");
     }
   }
 
-  public  static void clean() {
+  public static void clean() {
     WebDriver webDriver = null;
     totalSize = 0;
     do {
       webDriver = webDrivers.poll();
       if (null != webDriver) {
         webDriver.quit();
-
-      } else {
-        return;
       }
-    } while (true);
+    } while (webDriver != null);
+    try {
+      Runtime.getRuntime().exec("taskkill /f /im chrome.exe");
+      Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 

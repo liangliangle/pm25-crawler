@@ -7,6 +7,7 @@ import com.lianglianglee.pm25.crawler.WebDriverConst;
 import com.lianglianglee.pm25.database.DataDao;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -19,9 +20,10 @@ import java.util.List;
 public class MainTest {
 
   @Test
-  public void getDate() {
-    DataDao dataDao = new DataDao();
-    dataDao.getNewDate();
+  public void getDate() throws IOException {
+    //chrome.exe
+    Runtime.getRuntime().exec("taskkill /f /im WinRAR.exe");
+    Runtime.getRuntime().exec("cmd /c dir  taskkill /f /im chromedriver.exe");
   }
 
   @Test

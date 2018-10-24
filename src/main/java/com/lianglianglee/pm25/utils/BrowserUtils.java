@@ -23,34 +23,26 @@ public class BrowserUtils {
   private static Logger logger = Logger.getLogger(BrowserUtils.class);
 
 
-  private static String getPhantomjs() {
-    String osName = System.getProperty("os.name");
-    if (osName.indexOf("Windows") >= 0) {
-      return "phantomjs.exe";
-    }
-    return "phantomjs";
-  }
-
   /**
-   * get webDriver.
+   * 打开谷歌浏览器.
+   *
+   * @return 返回浏览器
    */
   public static WebDriver getInstance() {
-    //设置必要参数
-    DesiredCapabilities dcaps = new DesiredCapabilities();
-    //ssl证书支持
-    dcaps.setCapability("acceptSslCerts", true);
-    //截屏支持
-    dcaps.setCapability("takesScreenshot", false);
-    //css搜索支持
-    dcaps.setCapability("cssSelectorsEnabled", true);
-    //js支持
-    dcaps.setJavascriptEnabled(true);
-    //驱动支持（第二参数表明的是你的phantomjs引擎所在的路径，使用whereis phantomjs可以查看）
-    dcaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, getPhantomjs());
-    WebDriver driver = new PhantomJSDriver(dcaps);
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
-    return driver;
+    try {
+      String driverDirectory = "chromedriver.exe";
+      ChromeDriverService src = new ChromeDriverService.Builder()
+              .usingDriverExecutable(new File(driverDirectory)).usingAnyFreePort().build();
+      src.start();
+      ChromeOptions options = new ChromeOptions();
+      ChromeDriver driver = new ChromeDriver(src, options);
+      driver.manage().window().maximize();
+      driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+      return driver;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
 }

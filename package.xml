@@ -9,23 +9,38 @@
   <fileSets>
     <!-- 项目一些说明的资源输出的目录，下面为当前目录 -->
     <fileSet>
-      <directory></directory>
-      <outputDirectory></outputDirectory>
-      <!-- 指定那些文件需要复制进该目录下 -->
-      <includes>
-        <include>README.md</include>
-        <include>config.properties</include>
-        <include>start.sh</include>
-        <include>phantomjs.exe</include>
-        <include>phantomjs</include>
-      </includes>
-    </fileSet>
-    <fileSet>
-      <outputDirectory></outputDirectory>
+      <outputDirectory>crawler</outputDirectory>
       <directory>target</directory>
       <includes>
         <include>pm25-crawler-1.0.jar</include>
       </includes>
     </fileSet>
   </fileSets>
+  <files>
+    <file>
+      <source>README.md</source>
+      <outputDirectory>crawler</outputDirectory>
+    </file>
+    <file>
+      <source>config.properties</source>
+      <fileMode>0771</fileMode>
+      <outputDirectory>crawler</outputDirectory>
+    </file>
+    <file>
+      <source>chromedriver.exe</source>
+      <fileMode>0777</fileMode>
+      <outputDirectory>crawler</outputDirectory>
+    </file>
+    <file>
+      <source>kill.sh</source>
+      <fileMode>0777</fileMode>
+      <outputDirectory>crawler</outputDirectory>
+    </file>
+    <file>
+      <source>start.sh</source>
+      <fileMode>0777</fileMode>
+      <outputDirectory>crawler</outputDirectory>
+    </file>
+  </files>
+
 </assembly>  
