@@ -4,9 +4,6 @@ import com.lianglianglee.pm25.consts.AppConst;
 import com.lianglianglee.pm25.utils.LoggerUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.openqa.selenium.By;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @ClessName CheckData
@@ -18,7 +15,7 @@ import org.slf4j.LoggerFactory;
 public class CheckData {
 
   public static boolean checkData() {
-    String html = WebDriverConst.getUrl(UrlConst.MAIN_URL);
+    String html = WebDriverConst.getUrl(UrlConst.RANK_URL, true);
     Document doc = Jsoup.parse(html);
     String currentString = doc.getElementsByClass("time").text();
     LoggerUtil.info("页面" + currentString);

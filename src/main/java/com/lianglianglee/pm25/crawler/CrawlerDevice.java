@@ -49,7 +49,7 @@ public class CrawlerDevice extends Thread {
 
   public List<List<String>> getData() {
     LoggerUtil.info("开始爬取城市信息：" + url);
-    String html = WebDriverConst.getUrl(this.url);
+    String html = WebDriverConst.getUrl(this.url, false);
     LoggerUtil.info("抓取到城市信息：" + url);
     List<List<String>> data;
     Document doc = Jsoup.parse(html);

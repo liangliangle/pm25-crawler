@@ -30,11 +30,7 @@ public class ConfigurationUtil {
 
   static {
     try {
-      String jarWholePath = ConfigurationUtil.class.getProtectionDomain().getCodeSource()
-              .getLocation().getFile();
-      jarWholePath = java.net.URLDecoder.decode(jarWholePath, "UTF-8");
-      System.out.println(jarWholePath);
-      prop.load(new FileInputStream(jarWholePath + "/../config.properties"));
+      prop.load(new FileInputStream("config.properties"));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

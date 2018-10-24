@@ -1,0 +1,1 @@
+nohup java -jar pm25-crawler-1.0.jar &

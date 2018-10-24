@@ -26,7 +26,7 @@ public class BrowserPool {
     }
   }
 
-  private static Queue<WebDriver> webDrivers = new ConcurrentLinkedQueue<>();
+  private static ConcurrentLinkedQueue<WebDriver> webDrivers = new ConcurrentLinkedQueue<>();
 
 
   public static WebDriver getWebDriver() {
@@ -48,13 +48,39 @@ public class BrowserPool {
         }
       }
     } while (null == webDriver);
+    webDriver.switchTo().defaultContent();
     LoggerUtil.info("浏览器要返回了，还有：" + webDrivers.size() + "个浏览器");
     return webDriver;
   }
 
-  public synchronized static void restore(WebDriver webDriver) {
-    webDrivers.add(webDriver);
-    LoggerUtil.info("浏览器要归还了，还有：" + webDrivers.size() + "个浏览器");
+  public static void restore(WebDriver webDriver) {
+    synchronized (webDrivers) {
+      webDrivers.add(webDriver);
+      LoggerUtil.info("浏览器要归还了，还有：" + webDrivers.size() + "个浏览器");
+    }
+  }
+
+
+  public  static void quit(WebDriver webDriver) {
+    synchronized(totalSize) {
+      webDriver.quit();
+      totalSize--;
+      LoggerUtil.info("浏览器注销了，还有：" + webDrivers.size() + "个浏览器");
+    }
+  }
+
+  public  static void clean() {
+    WebDriver webDriver = null;
+    totalSize = 0;
+    do {
+      webDriver = webDrivers.poll();
+      if (null != webDriver) {
+        webDriver.quit();
+
+      } else {
+        return;
+      }
+    } while (true);
   }
 
 

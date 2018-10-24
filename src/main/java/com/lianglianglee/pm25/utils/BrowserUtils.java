@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @ClessName BrowserUtils
- * @Desc TODO
  * @Author liangliang
  * @Date 2018/9/30 13:42
  * @Version 1.0
@@ -38,18 +37,20 @@ public class BrowserUtils {
   public static WebDriver getInstance() {
     //设置必要参数
     DesiredCapabilities dcaps = new DesiredCapabilities();
-//ssl证书支持
+    //ssl证书支持
     dcaps.setCapability("acceptSslCerts", true);
-//截屏支持
-    dcaps.setCapability("takesScreenshot", true);
-//css搜索支持
+    //截屏支持
+    dcaps.setCapability("takesScreenshot", false);
+    //css搜索支持
     dcaps.setCapability("cssSelectorsEnabled", true);
-//js支持
+    //js支持
     dcaps.setJavascriptEnabled(true);
-//驱动支持（第二参数表明的是你的phantomjs引擎所在的路径，使用whereis phantomjs可以查看）
+    //驱动支持（第二参数表明的是你的phantomjs引擎所在的路径，使用whereis phantomjs可以查看）
     dcaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, getPhantomjs());
     WebDriver driver = new PhantomJSDriver(dcaps);
-    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
     return driver;
   }
+
 }

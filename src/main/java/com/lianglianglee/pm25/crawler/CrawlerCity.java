@@ -5,8 +5,6 @@ import com.lianglianglee.pm25.utils.LoggerUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class CrawlerCity {
   public List<List<String>> getData() {
     LoggerUtil.info("开始爬取排行榜");
     List<List<String>> data;
-    String html = WebDriverConst.getUrl(UrlConst.MAIN_URL);
+    String html = WebDriverConst.getUrl(UrlConst.RANK_URL,false);
     Document doc = Jsoup.parse(html);
     Element table = doc.select("table").first();
     data = HtmlUtils.getCityTable(table, 1, index);

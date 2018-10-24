@@ -9,5 +9,6 @@ package com.lianglianglee.pm25.crawler;
  */
 public class UrlConst {
 
-  public static final String MAIN_URL = "http://pm25.in/rank";
+  public static final String RANK_URL = "http://pm25.in/rank";
+  public static final String MAIN_URL = "http://pm25.in";
 }

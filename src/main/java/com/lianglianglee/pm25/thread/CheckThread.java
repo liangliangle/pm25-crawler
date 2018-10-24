@@ -1,6 +1,7 @@
 package com.lianglianglee.pm25.thread;
 
 import com.lianglianglee.pm25.crawler.CheckData;
+import com.lianglianglee.pm25.utils.BrowserPool;
 
 /**
  * @ClessName CheckThread
@@ -16,6 +17,8 @@ public class CheckThread {
         if (!CheckData.checkData()) {
           new MainThread().run();
           new ThreadPool().run();
+        } else {
+          BrowserPool.clean();
         }
         Thread.sleep(60000);
       } catch (Exception e) {

@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.Set;
 
+import static com.lianglianglee.pm25.crawler.UrlConst.MAIN_URL;
+
 /**
  * @ClessName WebDriverConst
  * @Desc WebDriver封装
@@ -19,11 +21,19 @@ import java.util.Set;
 public class WebDriverConst {
 
 
-  public static String getUrl(String url) {
+  public static String getUrl(String url, boolean disposable) {
     WebDriver wd = getWebDriver();
-    wd.get(url);
+    String oldUrl = wd.getCurrentUrl();
+    {
+      if (oldUrl.equals(url)) {
+        wd.navigate().refresh();
+      } else {
+        wd.get(url);
+      }
+    }
+
     String html = wd.getPageSource();
-    restore(wd);
+    restore(wd, disposable);
     return html;
   }
 
@@ -34,7 +44,11 @@ public class WebDriverConst {
     return webDriver;
   }
 
-  public static void restore(WebDriver webDriver) {
-    BrowserPool.restore(webDriver);
+  public static void restore(WebDriver webDriver, boolean disposable) {
+    if (disposable) {
+      BrowserPool.quit(webDriver);
+    } else {
+      BrowserPool.restore(webDriver);
+    }
   }
 }
