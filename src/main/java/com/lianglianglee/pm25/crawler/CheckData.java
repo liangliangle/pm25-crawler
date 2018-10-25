@@ -47,7 +47,7 @@ public class CheckData {
         }
       }
     }
-    return isNewTime(time1, time2);
+    return isNewTime(time1, time2+":00");
   }
 
 
