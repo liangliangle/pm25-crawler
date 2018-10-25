@@ -80,8 +80,7 @@ public class BrowserPool {
       }
     } while (webDriver != null);
     try {
-      Runtime.getRuntime().exec("taskkill /f /im chrome.exe");
-      Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe");
+      Runtime.getRuntime().exec("taskkill /f /im phantomjs.exe");
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -1,2 +1,2 @@
-taskkill /f /im chrome.exe
+taskkill /f /im phantomjs.exe
 taskkill /f /im chromedriver.exe

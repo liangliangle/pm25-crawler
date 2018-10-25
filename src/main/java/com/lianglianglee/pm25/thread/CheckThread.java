@@ -14,7 +14,7 @@ public class CheckThread {
   public void run() {
     while (true) {
       try {
-        if (!CheckData.checkData()) {
+        if (CheckData.isNewDate()) {
           BrowserPool.clean();
           new MainThread().run();
           new ThreadPool().run();

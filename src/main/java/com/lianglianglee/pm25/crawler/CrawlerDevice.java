@@ -6,8 +6,6 @@ import com.lianglianglee.pm25.utils.LoggerUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,10 +53,11 @@ public class CrawlerDevice extends Thread {
     Document doc = Jsoup.parse(html);
     String time = doc.getElementsByClass("live_data_time").text();
     String cityname = doc.getElementsByClass("city_name").tagName("h2").text();
-    if (CheckData.checkData(time)) {
+    if (CheckData.isCurrentDate(time)) {
       Element table = doc.select("table").first();
       data = HtmlUtils.getDeivceData(table, cityname, index);
     } else {
+      //todo 等待一段时间重爬
       data = new ArrayList<>();
     }
     LoggerUtil.info("抓取城市" + cityname + "信息数量：" + data.size());
