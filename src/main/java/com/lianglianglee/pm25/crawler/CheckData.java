@@ -69,9 +69,10 @@ public class CheckData {
         time = formatter.format(date1);
 
       } else {
-        time = formatter.format(date1);
+        time = formatter.format(date2);
       }
       if (!AppConst.getDate().equals(time)) {
+        AppConst.setDate(time);
         return true;
       }
     } catch (Exception e) {
