@@ -4,6 +4,10 @@ import com.lianglianglee.pm25.consts.AppConst;
 import com.lianglianglee.pm25.utils.LoggerUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.util.List;
+
 
 /**
  * @ClessName CheckData
@@ -25,6 +29,22 @@ public class CheckData {
         AppConst.setDate(strings[1]);
         return true;
       }
+    }
+    List<String> strings = doc.getElementsByTag("tspan").eachText();
+    for (String s : strings) {
+      if(s.indexOf("发布")>0) {
+        LoggerUtil.info("页面" + s);
+        String date = AppConst.getDate();
+        date = date + " 发布";
+        if (!s.equals(date)) {
+          String[] times = s.split(" 发");
+          if (times.length == 2) {
+            AppConst.setDate(times[0]);
+            return true;
+          }
+        }
+      }
+
     }
     return false;
   }
