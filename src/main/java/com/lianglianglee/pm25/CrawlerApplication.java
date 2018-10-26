@@ -1,7 +1,7 @@
 package com.lianglianglee.pm25;
 
 import com.lianglianglee.pm25.consts.AppConst;
-import com.lianglianglee.pm25.thread.CheckThread;
+import com.lianglianglee.pm25.thread.MainThread;
 
 /**
  * @ClessName CrawlerApplication
@@ -14,7 +14,7 @@ public class CrawlerApplication {
 
   public static void main(String args[]) {
     AppConst.build();
-    new CheckThread().run();
+    new MainThread().run();
 
   }
 

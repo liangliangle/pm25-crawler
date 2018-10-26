@@ -1,7 +1,9 @@
 package com.lianglianglee.pm25.thread;
 
+import com.lianglianglee.pm25.crawler.CheckData;
 import com.lianglianglee.pm25.crawler.CrawlerCity;
 import com.lianglianglee.pm25.database.DataDao;
+import com.lianglianglee.pm25.utils.BrowserPool;
 
 import java.util.List;
 
@@ -13,8 +15,21 @@ import java.util.List;
  */
 public class MainThread {
   public void run() {
-    List<List<String>> data = new CrawlerCity().getData();
-    new DataDao().insertCityAir(data);
-
+    while (true) {
+      try {
+        if (CheckData.isNewDate()) {
+          BrowserPool.clean();
+          List<List<String>> data = new CrawlerCity().getData();
+          new DataDao().insertCityAir(data);
+          new ThreadPool().run();
+        }
+        Thread.sleep(60000);
+      } catch (RuntimeException e) {
+        e.printStackTrace();
+      } catch
+      (Exception e) {
+        e.printStackTrace();
+      }
+    }
   }
 }

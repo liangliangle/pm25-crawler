@@ -22,27 +22,28 @@
     <json-version>2.9.0</json-version>
   </properties>
   <dependencies>
-    <!---补全项目依赖 -->
-    <!-- 1：日志 java 日志：slf4就，log4j，logback，common-logging slf4j 是规范接口 日志实现：log4j，logback，common-logging
-        使用：slf4j+logback -->
+    <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
     <dependency>
       <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.12</version>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.5</version>
     </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>1.0.11</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.0.11</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/com.codeborne/phantomjsdriver -->
     <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>phantomjsdriver</artifactId>
       <version>1.4.4</version>
-    </dependency>
-
-
-    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.9.1</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

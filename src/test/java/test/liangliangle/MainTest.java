@@ -5,6 +5,8 @@ import com.lianglianglee.pm25.crawler.CheckData;
 import com.lianglianglee.pm25.crawler.CrawlerDevice;
 import com.lianglianglee.pm25.crawler.WebDriverConst;
 import com.lianglianglee.pm25.database.DataDao;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -40,6 +42,15 @@ public class MainTest {
 
   }
 
+
+  @Test
+  public void testHtml() {
+    Document doc = Jsoup.parse("");
+    String time = doc.getElementsByClass("live_data_time").text();
+    String cityname = doc.getElementsByClass("city_name").tagName("h2").text();
+    System.out.println(time + "  " + cityname);
+  }
+
   @Test
   public void getData() {
     AppConst.setDate("2017-08-16 16:00:00");
@@ -51,6 +62,5 @@ public class MainTest {
       });
       System.out.println();
     });
-
   }
 }

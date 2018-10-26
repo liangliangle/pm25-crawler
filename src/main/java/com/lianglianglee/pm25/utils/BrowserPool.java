@@ -19,6 +19,7 @@ public class BrowserPool {
 
   private static Integer maxPoolSize = 10;
   private static Integer totalSize = 0;
+  private static final Logger logger = LoggerFactory.getLogger(BrowserPool.class);
 
   static {
     String size = ConfigurationUtil.getProperty("webdriver.maxsize");
@@ -31,7 +32,7 @@ public class BrowserPool {
 
 
   public static WebDriver getWebDriver() {
-    LoggerUtil.info("有线程需要浏览器");
+    logger.info("有线程需要浏览器");
     WebDriver webDriver = null;
     do {
       webDriver = webDrivers.poll();
@@ -43,21 +44,21 @@ public class BrowserPool {
         synchronized (totalSize) {
           if (totalSize < maxPoolSize) {
             totalSize++;
-            LoggerUtil.info("打开新的浏览器了");
+            logger.info("打开新的浏览器了");
             webDriver = BrowserUtils.getInstance();
           }
         }
       }
     } while (null == webDriver);
     webDriver.switchTo().defaultContent();
-    LoggerUtil.info("浏览器要返回了，还有：" + webDrivers.size() + "个浏览器");
+    logger.info("浏览器要返回了，还有：" + webDrivers.size() + "个浏览器");
     return webDriver;
   }
 
   public static void restore(WebDriver webDriver) {
     synchronized (webDrivers) {
       webDrivers.add(webDriver);
-      LoggerUtil.info("浏览器要归还了，还有：" + webDrivers.size() + "个浏览器");
+      logger.info("浏览器要归还了，还有：" + webDrivers.size() + "个浏览器");
     }
   }
 
@@ -66,7 +67,7 @@ public class BrowserPool {
     synchronized (totalSize) {
       webDriver.quit();
       totalSize--;
-      LoggerUtil.info("浏览器注销了，还有：" + webDrivers.size() + "个浏览器");
+      logger.info("浏览器注销了，还有：" + webDrivers.size() + "个浏览器");
     }
   }
 

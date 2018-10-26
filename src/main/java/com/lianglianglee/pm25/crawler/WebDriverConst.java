@@ -22,15 +22,12 @@ public class WebDriverConst {
 
 
   public static String getUrl(String url, boolean disposable) {
-    try {
-      WebDriver wd = getWebDriver();
-      wd.get(url);
-      String html = wd.getPageSource();
-      restore(wd, disposable);
-      return html;
-    } catch (Exception e) {
-      throw new RuntimeException("页面加载失败");
-    }
+    WebDriver wd = getWebDriver();
+    wd.get(url);
+    String html = wd.getPageSource();
+    restore(wd, disposable);
+    return html;
+
   }
 
 

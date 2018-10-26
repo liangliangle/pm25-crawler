@@ -1,9 +1,10 @@
 package com.lianglianglee.pm25.crawler;
 
 import com.lianglianglee.pm25.consts.AppConst;
-import com.lianglianglee.pm25.utils.LoggerUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,13 +21,15 @@ public class CheckData {
 
   private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+  private static Logger logger = LoggerFactory.getLogger(CheckData.class);
+
   public static boolean isNewDate() {
     String time1 = "";
     String time2 = "";
     String html = WebDriverConst.getUrl(UrlConst.RANK_URL, true);
     Document doc = Jsoup.parse(html);
     String currentString = doc.getElementsByClass("time").text();
-    LoggerUtil.info("页面" + currentString);
+    logger.info("页面" + currentString);
     if (!isCurrentDate(currentString)) {
       String[] strings = currentString.split("数据更新时间：");
       if (strings.length == 2) {
@@ -36,7 +39,7 @@ public class CheckData {
     List<String> strings = doc.getElementsByTag("tspan").eachText();
     for (String s : strings) {
       if (s.indexOf("发布") > 0) {
-        LoggerUtil.info("页面" + s);
+        logger.info("页面" + s);
         String date = AppConst.getDate();
         date = date + " 发布";
         if (!s.equals(date)) {
@@ -47,7 +50,7 @@ public class CheckData {
         }
       }
     }
-    return isNewTime(time1, time2+":00");
+    return isNewTime(time1, time2 + ":00");
   }
 
 
@@ -61,6 +64,12 @@ public class CheckData {
   }
 
   private static boolean isNewTime(String time1, String time2) {
+    if (time1.length() == 0) {
+      time1 = "2016-01-01 01:00:00";
+    }
+    if (time2.length() == 0) {
+      time2 = "2016-01-01 01:00:00";
+    }
     try {
       Date date1 = formatter.parse(time1);
       Date date2 = formatter.parse(time2);

@@ -1,7 +1,8 @@
 package com.lianglianglee.pm25.database;
 
 import com.lianglianglee.pm25.utils.ConfigurationUtil;
-import com.lianglianglee.pm25.utils.LoggerUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,11 +17,12 @@ import java.sql.SQLException;
  */
 public class Conn {
 
+  private static Logger logger= LoggerFactory.getLogger(Conn.class);
   public static Connection getConn() {
     Connection conn = null;
 
     try {
-      LoggerUtil.info("获取数据库连接");
+      logger.info("获取数据库连接");
       Class.forName(ConfigurationUtil.getProperty(ConfigurationUtil.DATASOURCE_CLASS));
       // String url = "jdbc:postgresql://172.27.244.94:5432/postgres";
       String url = ConfigurationUtil.getProperty(ConfigurationUtil.DATASOURCE_URL);

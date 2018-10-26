@@ -32,6 +32,11 @@
       <outputDirectory>crawler</outputDirectory>
     </file>
     <file>
+      <source>phantomjs.exe</source>
+      <fileMode>0777</fileMode>
+      <outputDirectory>crawler</outputDirectory>
+    </file>
+    <file>
       <source>kill.sh</source>
       <fileMode>0777</fileMode>
       <outputDirectory>crawler</outputDirectory>

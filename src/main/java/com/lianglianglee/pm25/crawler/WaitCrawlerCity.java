@@ -1,6 +1,7 @@
 package com.lianglianglee.pm25.crawler;
 
-import com.lianglianglee.pm25.utils.LoggerUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -14,15 +15,16 @@ import java.util.Queue;
  */
 public class WaitCrawlerCity {
 
+  private  static Logger logger= LoggerFactory.getLogger(WaitCrawlerCity.class);
   private static Queue<String> waitUrl = new LinkedList<>();
 
   public synchronized static void addTask(String url) {
-    LoggerUtil.info("添加任务，剩余任务数：" + waitUrl.size());
+    logger.info("添加任务，剩余任务数：" + waitUrl.size());
     waitUrl.add(url);
   }
 
   public synchronized static String getTask() {
-    LoggerUtil.info("获取任务，剩余任务数：" + waitUrl.size());
+    logger.info("获取任务，剩余任务数：" + waitUrl.size());
     return waitUrl.poll();
   }
 }
